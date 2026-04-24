@@ -39,6 +39,32 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+// Organization structured data
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Kingcore",
+  legalName: "Imperial Synergies",
+  url: "https://kingcore.pk",
+  description:
+    "Pakistan's leading manufacturer of precision paper tubes, cores, and cones for textile, packaging, and industrial applications.",
+  foundingDate: "1995",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Lahore",
+    addressRegion: "Punjab",
+    addressCountry: "PK",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+92-320-4471003",
+    contactType: "sales",
+    email: "info@kingcore.pk",
+    availableLanguage: ["English", "Urdu"],
+  },
+  sameAs: [],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -49,6 +75,12 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <a href="#main" className="skip-link">
           Skip to content

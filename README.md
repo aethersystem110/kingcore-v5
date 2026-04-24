@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kingcore — Precision Paper Tubes & Cores
 
-## Getting Started
+Production marketing website for Kingcore, a paper tube core manufacturer serving international export clients.
 
-First, run the development server:
+## Local Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.local.example` to `.env.local` and fill in:
 
-## Learn More
+```env
+RESEND_API_KEY=re_xxxxxxxxxxxx
+CONTACT_EMAIL_TO=info@kingcore.pk
+CONTACT_EMAIL_FROM=website@kingcore.pk
+```
 
-To learn more about Next.js, take a look at the following resources:
+The contact form works without `RESEND_API_KEY` in development (logs submissions to console).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Editing Content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+All site copy lives in `src/content/site.ts` — company info, hero text, industries, product specs, process steps, about text, and contact details.
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Built for [Vercel](https://vercel.com):
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+```
+
+## Tech Stack
+
+- Next.js 16 (App Router, TypeScript, Turbopack)
+- Tailwind CSS 4
+- GSAP + ScrollTrigger (scroll-scrubbed video hero)
+- Resend (contact form emails)

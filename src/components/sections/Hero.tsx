@@ -124,18 +124,18 @@ export function Hero() {
         {/* Scrim for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
 
-        {/* ── Loading overlay ──────────────────────── */}
+        {/* ── Branded loading overlay ────────────────── */}
         <div
           className={`absolute inset-0 z-30 flex items-center justify-center bg-[var(--color-bg)] transition-opacity duration-700 ${
             loaded ? "pointer-events-none opacity-0" : "opacity-100"
           }`}
           aria-hidden={loaded}
         >
-          <div className="flex flex-col items-center gap-4">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-transparent" />
-            <p className="text-sm uppercase tracking-[0.25em] text-[var(--color-text-muted)]">
-              Loading
-            </p>
+          <div className="flex flex-col items-center gap-6">
+            <span className="font-serif text-3xl text-[var(--color-text)] md:text-4xl">
+              Kingcore
+            </span>
+            <div className="h-px w-16 animate-pulse bg-[var(--color-accent)]" />
           </div>
         </div>
 
