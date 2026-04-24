@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────── */
+:root {
+  --color-bg: #f4ebd9;
+  --color-bg-alt: #faf5ea;
+  --color-surface: #faf5ea;
+  --color-text: #3d2b1f;
+  --color-text-muted: #6b5846;
+  --color-accent: #b87333;
+  --color-accent-hover: #9a5f2a;
+  --color-accent-light: #f0dfc5;
+  --color-border: #d9cbb4;
+
+  --section-py: 5rem;
+  --container-px: 1.5rem;
+  --container-max: 80rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --section-py: 7.5rem;
+    --container-px: 2.5rem;
+  }
+}
+
+@theme inline {
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-instrument-serif);
+}
+
+/* ── Base ──────────────────────────────────────────── */
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+::selection {
+  background: var(--color-accent-light);
+  color: var(--color-text);
+}
+
+/* ── Focus states ──────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── Skip link ─────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-accent);
+  color: white;
+  font-weight: 500;
+  border-radius: 0 0 0.5rem 0.5rem;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
