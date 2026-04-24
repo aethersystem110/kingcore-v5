@@ -13,6 +13,7 @@ export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const stickyRef = useRef<HTMLDivElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
   const slide1Ref = useRef<HTMLDivElement>(null);
   const slide2Ref = useRef<HTMLDivElement>(null);
   const slide3Ref = useRef<HTMLDivElement>(null);
@@ -56,6 +57,7 @@ export function Hero() {
 
     const section = sectionRef.current;
     const video = videoRef.current;
+    const logo = logoRef.current;
     const s1 = slide1Ref.current;
     const s2 = slide2Ref.current;
     const s3 = slide3Ref.current;
@@ -76,6 +78,16 @@ export function Hero() {
 
     // Video playback bound to scroll
     tl.to(video, { currentTime: duration, ease: "none", duration: 1 }, 0);
+
+    // ── Center logo: visible at start, fades out by 4% ──
+    if (logo) {
+      tl.fromTo(
+        logo,
+        { autoAlpha: 1, scale: 1 },
+        { autoAlpha: 0, scale: 0.85, duration: 0.04, ease: "power2.in" },
+        0,
+      );
+    }
 
     // ── Slide 1: 5%–25% ───────────────────────────────
     tl.fromTo(s1, { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.08 }, 0.05);
@@ -139,6 +151,16 @@ export function Hero() {
           </div>
         </div>
 
+        {/* ── Center logo — fades out as you scroll ── */}
+        <div
+          ref={logoRef}
+          className="absolute inset-0 z-20 flex items-center justify-center"
+        >
+          <span className="font-serif text-5xl tracking-wide text-white sm:text-6xl md:text-7xl lg:text-8xl">
+            Kingcore
+          </span>
+        </div>
+
         {/* ── Text overlays ────────────────────────── */}
         <div className="absolute inset-0 z-10 flex items-center justify-center">
           {/* Slide 1 */}
@@ -146,9 +168,6 @@ export function Hero() {
             ref={slide1Ref}
             className="invisible absolute px-6 text-center"
           >
-            <p className="mb-4 font-sans text-xs font-medium uppercase tracking-[0.35em] text-white/70 md:text-sm">
-              {HERO_SLIDES[0].eyebrow}
-            </p>
             <h1 className="font-serif text-4xl leading-[1.1] text-white sm:text-5xl md:text-6xl lg:text-7xl">
               {HERO_SLIDES[0].headline}
             </h1>

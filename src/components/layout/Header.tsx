@@ -5,10 +5,18 @@ import { NAV_LINKS, CONTACT } from "@/content/site";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 80);
+      // Logo reappears only after leaving the hero section
+      const hero = document.querySelector('[aria-label="Hero"]');
+      if (hero) {
+        setPastHero(window.scrollY > hero.getBoundingClientRect().height - window.innerHeight);
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -49,15 +57,17 @@ export function Header() {
           className="mx-auto flex max-w-[var(--container-max)] items-center justify-between px-[var(--container-px)] py-4 md:py-5"
           aria-label="Main navigation"
         >
-          {/* Logo */}
+          {/* Logo — hidden in hero, appears when scrolled past */}
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
-            className={`font-serif text-xl tracking-wide transition-colors md:text-2xl ${
-              scrolled ? "text-[var(--color-text)]" : "text-white"
+            className={`font-serif text-xl tracking-wide transition-all duration-500 md:text-2xl ${
+              pastHero
+                ? "text-[var(--color-text)] translate-x-0 opacity-100"
+                : "text-white -translate-x-3 opacity-0 pointer-events-none"
             }`}
           >
             Kingcore
