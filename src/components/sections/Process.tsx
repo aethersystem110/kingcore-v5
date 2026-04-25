@@ -3,6 +3,7 @@
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { PROCESS_CHAPTERS } from "@/content/site";
+import { PROCESS_SVGS } from "./ProcessSVGs";
 
 export function Process() {
   return (
@@ -49,12 +50,11 @@ export function Process() {
                 <span className="absolute right-6 top-5 text-[9.5px] font-medium uppercase tracking-[0.24em] text-[var(--color-text-faint)]">
                   {ch.fig}
                 </span>
-                {/* Placeholder for SVG illustration */}
-                <div className="flex h-full w-full items-center justify-center text-[var(--color-text-faint)]">
-                  <span className="font-serif text-6xl italic text-[var(--color-accent)]/20">
-                    {ch.num}
-                  </span>
-                </div>
+                {/* Technical illustration */}
+                {(() => {
+                  const SvgComponent = PROCESS_SVGS[i];
+                  return SvgComponent ? <SvgComponent /> : null;
+                })()}
               </div>
 
               {/* Body */}

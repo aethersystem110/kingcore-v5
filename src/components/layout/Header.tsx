@@ -95,7 +95,7 @@ export function Header() {
             <LogoMark className="text-2xl tracking-tight text-[var(--color-text)]" dotSize={5} />
           </a>
 
-          {/* Desktop nav */}
+          {/* Desktop nav — centered links */}
           <div className="hidden items-center gap-8 md:flex">
             {NAV_LINKS.map((link) => (
               <a
@@ -107,25 +107,24 @@ export function Header() {
                 } ${activeSection === link.section ? "text-[var(--color-accent)]" : ""}`}
               >
                 {link.label}
-                {/* Active underline */}
                 <span
                   className={`absolute bottom-0 left-0 right-0 h-px bg-[var(--color-accent)] transition-transform duration-350 origin-left ${
-                    activeSection === link.section
-                      ? "scale-x-100"
-                      : "scale-x-0"
+                    activeSection === link.section ? "scale-x-100" : "scale-x-0"
                   }`}
                   style={{ transitionTimingFunction: "var(--ease)" }}
                 />
               </a>
             ))}
-            <a
-              href="#contact"
-              onClick={(e) => scrollToSection(e, "#contact")}
-              className="rounded-full bg-[var(--color-accent)] px-[22px] py-[11px] text-[13px] font-medium text-white transition-colors duration-350 hover:bg-[var(--color-accent-hover)]"
-            >
-              Get a quote →
-            </a>
           </div>
+
+          {/* CTA — right */}
+          <a
+            href="#contact"
+            onClick={(e) => scrollToSection(e, "#contact")}
+            className="hidden rounded-full bg-[var(--color-accent)] px-[22px] py-[11px] text-[13px] font-medium text-white transition-colors duration-350 hover:bg-[var(--color-accent-hover)] md:inline-flex"
+          >
+            Get a quote →
+          </a>
 
           {/* Mobile hamburger */}
           <button
