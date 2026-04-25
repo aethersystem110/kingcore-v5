@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HERO_SLIDES } from "@/content/site";
+import { BASE_PATH } from "@/lib/basePath";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -35,7 +36,14 @@ export function Hero() {
     } else {
       video.addEventListener("canplaythrough", onReady, { once: true });
       video.addEventListener("loadeddata", onReady, { once: true });
+      // Fallback: dismiss loader after 3s even if video hasn't loaded
+      const fallback = setTimeout(onReady, 3000);
       initVideo();
+      return () => {
+        clearTimeout(fallback);
+        video.removeEventListener("canplaythrough", onReady);
+        video.removeEventListener("loadeddata", onReady);
+      };
     }
     return () => {
       video.removeEventListener("canplaythrough", onReady);
@@ -97,10 +105,10 @@ export function Hero() {
           playsInline
           muted
           preload="auto"
-          poster="/hero_poster.jpg"
+          poster={`${BASE_PATH}/hero_poster.jpg`}
         >
-          <source src="/hero_hevc.mp4" type='video/mp4; codecs="hvc1"' />
-          <source src="/hero.mp4" type="video/mp4" />
+          <source src={`${BASE_PATH}/hero_hevc.mp4`} type='video/mp4; codecs="hvc1"' />
+          <source src={`${BASE_PATH}/hero.mp4`} type="video/mp4" />
         </video>
 
         <div className="absolute inset-0 bg-gradient-to-b from-black/42 via-black/18 to-black/55" />
