@@ -38,7 +38,7 @@ export function Footer() {
   return (
     <footer className="bg-[var(--color-night-dark)] pt-20 pb-10 text-[var(--color-paper)]" role="contentinfo">
       <Container>
-        <div className="grid gap-14 border-b border-[var(--color-paper)]/12 pb-14 md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-14">
+        <div className="grid grid-cols-1 gap-10 border-b border-[var(--color-paper)]/12 pb-14 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-14">
           {/* Logo + tagline */}
           <div>
             <LogoMark className="text-[34px] tracking-tight text-[var(--color-paper)]" dotSize={6} />

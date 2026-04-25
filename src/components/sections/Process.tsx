@@ -41,9 +41,9 @@ export function Process() {
       <div className="flex gap-6 overflow-x-auto px-[var(--container-px)] pb-24 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
         {PROCESS_CHAPTERS.map((ch, i) => (
           <ScrollReveal key={ch.num} delay={i * 0.08}>
-            <article className="flex w-[520px] flex-shrink-0 flex-col overflow-hidden rounded-md border border-[var(--color-border-light)] bg-[var(--color-surface)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-36px_rgba(61,43,31,.22)] md:min-h-[660px]">
+            <article className="flex w-[88vw] flex-shrink-0 flex-col overflow-hidden rounded-md border border-[var(--color-border-light)] bg-[var(--color-surface)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-36px_rgba(61,43,31,.22)] sm:w-[520px] md:min-h-[660px]">
               {/* Vis area */}
-              <div className="relative flex h-[340px] items-center justify-center border-b border-[var(--color-border-light)] bg-[var(--color-bg-warm)]">
+              <div className="relative flex h-[240px] items-center justify-center border-b border-[var(--color-border-light)] bg-[var(--color-bg-warm)] sm:h-[340px]">
                 <span className="absolute left-6 top-5 font-serif text-xl italic text-[var(--color-accent)]">
                   {ch.num}
                 </span>

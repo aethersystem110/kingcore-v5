@@ -50,16 +50,16 @@ function CounterCell({
 
   return (
     <div
-      className={`px-7 py-12 ${
-        index < STATS_SECTION.items.length - 1
-          ? "border-r border-[var(--color-paper)]/12"
-          : ""
+      className={`px-4 py-8 sm:px-7 sm:py-12 ${
+        index % 2 === 0 ? "border-r border-[var(--color-paper)]/12" : ""
+      } ${index < 2 ? "border-b border-[var(--color-paper)]/12 md:border-b-0" : ""} ${
+        index < STATS_SECTION.items.length - 1 ? "md:border-r md:border-[var(--color-paper)]/12" : ""
       }`}
     >
       <div className="mb-6 text-[10.5px] font-medium uppercase tracking-[0.24em] text-[var(--color-paper)]/45">
         {item.key}
       </div>
-      <div className="font-serif text-6xl leading-[0.95] tracking-tight text-[var(--color-paper)] md:text-7xl lg:text-8xl">
+      <div className="font-serif text-4xl leading-[0.95] tracking-tight text-[var(--color-paper)] sm:text-6xl md:text-7xl lg:text-8xl">
         {"prefix" in item && item.prefix && (
           <span className="text-[0.55em] italic text-[var(--color-accent)]">
             {item.prefix}

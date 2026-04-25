@@ -41,8 +41,8 @@ export function Industries() {
             <ScrollReveal key={ind.name} delay={i * 0.04}>
               <div
                 className={`relative border-b border-[var(--color-border)] py-9 pr-7 transition-colors duration-300 hover:bg-[var(--color-bg-alt)] ${
-                  (i + 1) % 4 !== 0 ? "lg:border-r" : ""
-                } ${(i + 1) % 2 !== 0 ? "sm:border-r lg:border-r" : "sm:border-r-0"}`}
+                  (i + 1) % 4 !== 0 ? "lg:border-r" : "lg:border-r-0"
+                } ${(i + 1) % 2 !== 0 ? "sm:border-r" : "sm:border-r-0"}`}
               >
                 <span className="absolute right-3.5 top-5 font-serif text-sm italic text-[var(--color-accent)]">
                   {ind.num}

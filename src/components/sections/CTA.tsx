@@ -6,23 +6,23 @@ import { CTA_SECTION, CONTACT } from "@/content/site";
 
 export function CTA() {
   return (
-    <section className="relative border-t border-[var(--color-border)] bg-[var(--color-accent-light)] py-40 text-center md:py-44">
+    <section className="relative border-t border-[var(--color-border)] bg-[var(--color-accent-light)] py-24 text-center sm:py-32 md:py-40 lg:py-44">
       <Container>
         <ScrollReveal>
           <p className="eyebrow mb-6">{CTA_SECTION.eyebrow}</p>
         </ScrollReveal>
         <ScrollReveal delay={0.1}>
           <h2
-            className="prose-copper mx-auto max-w-[920px] font-serif text-5xl leading-[0.98] tracking-tight md:text-7xl lg:text-[104px]"
+            className="prose-copper mx-auto max-w-[920px] font-serif text-4xl leading-[0.98] tracking-tight sm:text-5xl md:text-7xl lg:text-[104px]"
             dangerouslySetInnerHTML={{ __html: CTA_SECTION.headline }}
           />
         </ScrollReveal>
 
         <ScrollReveal delay={0.2}>
-          <div className="mt-11 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:mt-11 sm:flex-row">
             <a
               href="#contact"
-              className="inline-flex items-center gap-3.5 rounded-full bg-[var(--color-text)] px-9 py-5 text-sm font-medium text-[var(--color-paper)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent)]"
+              className="inline-flex w-full items-center justify-center gap-3.5 rounded-full bg-[var(--color-text)] px-9 py-4 text-sm font-medium text-[var(--color-paper)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[var(--color-accent)] sm:w-auto sm:py-5"
             >
               <span>Get a quote</span>
               <span className="transition-transform duration-300 group-hover:translate-x-1.5">
@@ -33,7 +33,7 @@ export function CTA() {
               href={CONTACT.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3.5 rounded-full border border-[var(--color-text)] bg-transparent px-9 py-5 text-sm font-medium text-[var(--color-text)] transition-all duration-300 hover:bg-[var(--color-text)] hover:text-[var(--color-paper)]"
+              className="inline-flex w-full items-center justify-center gap-3.5 rounded-full border border-[var(--color-text)] bg-transparent px-9 py-4 text-sm font-medium text-[var(--color-text)] transition-all duration-300 hover:bg-[var(--color-text)] hover:text-[var(--color-paper)] sm:w-auto sm:py-5"
             >
               WhatsApp Sir Ali
             </a>
