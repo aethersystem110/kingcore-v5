@@ -20,25 +20,6 @@ export function Hero() {
   const scrollHintRef = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
 
-  // Pre-warm the browser's video decode cache by seeking through
-  // key positions. This prevents first-scroll jank.
-  const warmCache = useCallback(async (video: HTMLVideoElement) => {
-    const duration = video.duration;
-    if (!duration || isNaN(duration)) return;
-    const steps = 24;
-    for (let i = 0; i <= steps; i++) {
-      video.currentTime = (i / steps) * duration;
-      // Wait for the browser to decode this frame
-      await new Promise<void>((resolve) => {
-        const onSeeked = () => { resolve(); };
-        video.addEventListener("seeked", onSeeked, { once: true });
-        // Fallback in case seeked doesn't fire
-        setTimeout(resolve, 80);
-      });
-    }
-    video.currentTime = 0;
-  }, []);
-
   const initVideo = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -49,26 +30,21 @@ export function Hero() {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    const onReady = async () => {
-      // Warm the decode cache before revealing the site
-      await warmCache(video);
-      setLoaded(true);
-    };
-
+    const onReady = () => setLoaded(true);
     if (video.readyState >= 3) {
-      onReady();
+      setLoaded(true);
     } else {
-      video.addEventListener("canplaythrough", () => onReady(), { once: true });
-      video.addEventListener("loadeddata", () => onReady(), { once: true });
-      // Fallback: dismiss loader after 5s even if warmup isn't done
-      const fallback = setTimeout(() => setLoaded(true), 5000);
+      video.addEventListener("canplaythrough", onReady, { once: true });
+      video.addEventListener("loadeddata", onReady, { once: true });
+      const fallback = setTimeout(onReady, 4000);
       initVideo();
       return () => {
         clearTimeout(fallback);
+        video.removeEventListener("canplaythrough", onReady);
+        video.removeEventListener("loadeddata", onReady);
       };
     }
-  }, [initVideo, warmCache]);
+  }, [initVideo]);
 
   useEffect(() => {
     if (!loaded) return;
