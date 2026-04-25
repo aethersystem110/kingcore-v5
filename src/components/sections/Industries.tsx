@@ -1,30 +1,8 @@
 "use client";
 
-import {
-  Shirt,
-  ScrollText,
-  Disc,
-  Cable,
-  Building2,
-  Layers,
-  UtensilsCrossed,
-  Package,
-} from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { INDUSTRIES } from "@/content/site";
-import type { LucideIcon } from "lucide-react";
-
-const ICON_MAP: Record<string, LucideIcon> = {
-  Shirt,
-  Scroll: ScrollText,
-  Tape: Disc,
-  Cable,
-  Building2,
-  Layers,
-  UtensilsCrossed,
-  Package,
-};
+import { INDUSTRIES_SECTION } from "@/content/site";
 
 export function Industries() {
   return (
@@ -34,41 +12,50 @@ export function Industries() {
       aria-labelledby="industries-heading"
     >
       <Container>
-        <ScrollReveal>
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--color-accent)]">
-            Industries
-          </p>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <h2
-            id="industries-heading"
-            className="mt-4 max-w-2xl font-serif text-3xl leading-tight text-[var(--color-text)] md:text-4xl lg:text-5xl"
-          >
-            Made for every industry that ships, winds, or rolls.
-          </h2>
-        </ScrollReveal>
+        {/* Header */}
+        <div className="mb-16 grid gap-12 md:grid-cols-[1fr_1.5fr] md:gap-20">
+          <div>
+            <ScrollReveal>
+              <p className="eyebrow mb-5">{INDUSTRIES_SECTION.eyebrow}</p>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <h2
+                id="industries-heading"
+                className="prose-copper font-serif text-4xl leading-[1.04] tracking-tight md:text-5xl"
+                dangerouslySetInnerHTML={{
+                  __html: INDUSTRIES_SECTION.headline,
+                }}
+              />
+            </ScrollReveal>
+          </div>
+          <ScrollReveal delay={0.15}>
+            <p className="max-w-[480px] text-base leading-relaxed text-[var(--color-text-muted)]">
+              {INDUSTRIES_SECTION.description}
+            </p>
+          </ScrollReveal>
+        </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4 md:mt-16">
-          {INDUSTRIES.map((ind, i) => {
-            const Icon = ICON_MAP[ind.icon] ?? Package;
-            return (
-              <ScrollReveal key={ind.name} delay={i * 0.06}>
-                <div className="group rounded-xl border border-transparent bg-[var(--color-surface)] p-6 transition-all duration-200 hover:-translate-y-1 hover:border-[var(--color-accent)]/40 hover:shadow-md">
-                  <Icon
-                    className="h-6 w-6 text-[var(--color-accent)]"
-                    strokeWidth={1.5}
-                    aria-hidden="true"
-                  />
-                  <h3 className="mt-4 text-lg font-semibold text-[var(--color-text)]">
-                    {ind.name}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-muted)]">
-                    {ind.description}
-                  </p>
-                </div>
-              </ScrollReveal>
-            );
-          })}
+        {/* Grid */}
+        <div className="grid grid-cols-1 border-t border-[var(--color-border)] sm:grid-cols-2 lg:grid-cols-4">
+          {INDUSTRIES_SECTION.items.map((ind, i) => (
+            <ScrollReveal key={ind.name} delay={i * 0.04}>
+              <div
+                className={`relative border-b border-[var(--color-border)] py-9 pr-7 transition-colors duration-300 hover:bg-[var(--color-bg-alt)] ${
+                  (i + 1) % 4 !== 0 ? "lg:border-r" : ""
+                } ${(i + 1) % 2 !== 0 ? "sm:border-r lg:border-r" : "sm:border-r-0"}`}
+              >
+                <span className="absolute right-3.5 top-5 font-serif text-sm italic text-[var(--color-accent)]">
+                  {ind.num}
+                </span>
+                <h3 className="pl-7 font-serif text-2xl leading-[1.15] tracking-tight">
+                  {ind.name}
+                </h3>
+                <p className="mt-3 pl-7 text-sm leading-relaxed text-[var(--color-text-muted)]">
+                  {ind.description}
+                </p>
+              </div>
+            </ScrollReveal>
+          ))}
         </div>
       </Container>
     </section>

@@ -4,46 +4,41 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Container } from "@/components/ui/Container";
-import { COMPANY } from "@/content/site";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { STATS_SECTION } from "@/content/site";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-interface Stat {
-  value: number;
-  suffix: string;
-  label: string;
-  isText?: boolean;
-}
-
-const STATS: Stat[] = [
-  { value: new Date().getFullYear() - COMPANY.founded, suffix: "+", label: "Years" },
-  { value: 500, suffix: "K+", label: "Cores / Month" },
-  { value: 12, suffix: "+", label: "Countries" },
-  { value: 0, suffix: "", label: COMPANY.certifications, isText: true },
-];
-
-function CounterCell({ stat, index }: { stat: Stat; index: number }) {
+function CounterCell({
+  item,
+  index,
+}: {
+  item: (typeof STATS_SECTION.items)[number];
+  index: number;
+}) {
   const numRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const el = numRef.current;
-    if (!el || stat.isText) return;
+    if (!el) return;
 
     const proxy = { val: 0 };
     const tween = gsap.to(proxy, {
-      val: stat.value,
-      duration: 2,
+      val: item.value,
+      duration: 1.6,
       delay: index * 0.15,
-      ease: "power2.out",
+      ease: "power3.out",
       scrollTrigger: {
         trigger: el,
         start: "top 90%",
         toggleActions: "play none none none",
       },
       onUpdate: () => {
-        el.textContent = `${Math.round(proxy.val)}${stat.suffix}`;
+        el.textContent = item.decimals
+          ? proxy.val.toFixed(item.decimals)
+          : String(Math.round(proxy.val));
       },
     });
 
@@ -51,45 +46,66 @@ function CounterCell({ stat, index }: { stat: Stat; index: number }) {
       tween.scrollTrigger?.kill();
       tween.kill();
     };
-  }, [stat, index]);
-
-  if (stat.isText) {
-    return (
-      <div className="text-center">
-        <span className="block font-serif text-3xl text-white md:text-4xl lg:text-5xl">
-          ISO
-        </span>
-        <span className="mt-2 block text-sm tracking-widest text-white/50">
-          {stat.label}
-        </span>
-      </div>
-    );
-  }
+  }, [item, index]);
 
   return (
-    <div className="text-center">
-      <span
-        ref={numRef}
-        className="block font-serif text-3xl text-white md:text-4xl lg:text-5xl"
-      >
-        0
-      </span>
-      <span className="mt-2 block text-sm tracking-widest text-white/50">
-        {stat.label}
-      </span>
+    <div
+      className={`px-7 py-12 ${
+        index < STATS_SECTION.items.length - 1
+          ? "border-r border-[var(--color-paper)]/12"
+          : ""
+      }`}
+    >
+      <div className="mb-6 text-[10.5px] font-medium uppercase tracking-[0.24em] text-[var(--color-paper)]/45">
+        {item.key}
+      </div>
+      <div className="font-serif text-6xl leading-[0.95] tracking-tight text-[var(--color-paper)] md:text-7xl lg:text-8xl">
+        {"prefix" in item && item.prefix && (
+          <span className="text-[0.55em] italic text-[var(--color-accent)]">
+            {item.prefix}
+          </span>
+        )}
+        <span ref={numRef}>0</span>
+        <span className="ml-1.5 text-[0.42em] italic tracking-normal text-[var(--color-accent)]">
+          {item.suffix}
+        </span>
+      </div>
     </div>
   );
 }
 
 export function Stats() {
   return (
-    <section className="bg-[#1e1610] py-16 md:py-20" aria-label="Key statistics">
+    <section className="section-padding bg-[var(--color-night)] text-[var(--color-paper)]">
       <Container>
-        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
-          {STATS.map((stat, i) => (
-            <CounterCell key={stat.label} stat={stat} index={i} />
-          ))}
+        {/* Header */}
+        <div className="mb-[72px] grid gap-12 md:grid-cols-[1fr_1.5fr] md:gap-20">
+          <div>
+            <ScrollReveal>
+              <p className="eyebrow mb-5">{STATS_SECTION.eyebrow}</p>
+            </ScrollReveal>
+            <ScrollReveal delay={0.1}>
+              <h2
+                className="prose-copper font-serif text-4xl leading-[1.02] tracking-tight text-[var(--color-paper)] md:text-5xl lg:text-6xl"
+                dangerouslySetInnerHTML={{ __html: STATS_SECTION.headline }}
+              />
+            </ScrollReveal>
+          </div>
+          <ScrollReveal delay={0.15}>
+            <p className="max-w-[480px] text-base leading-relaxed text-[var(--color-paper)]/60">
+              {STATS_SECTION.description}
+            </p>
+          </ScrollReveal>
         </div>
+
+        {/* Grid */}
+        <ScrollReveal delay={0.2}>
+          <div className="grid grid-cols-2 border-y border-[var(--color-paper)]/12 md:grid-cols-4">
+            {STATS_SECTION.items.map((item, i) => (
+              <CounterCell key={item.key} item={item} index={i} />
+            ))}
+          </div>
+        </ScrollReveal>
       </Container>
     </section>
   );

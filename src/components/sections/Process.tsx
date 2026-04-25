@@ -1,71 +1,99 @@
 "use client";
 
-import { TreePine, RotateCcw, Scissors, ShieldCheck } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { PROCESS_STEPS } from "@/content/site";
-import type { LucideIcon } from "lucide-react";
-
-const ICONS: LucideIcon[] = [TreePine, RotateCcw, Scissors, ShieldCheck];
+import { PROCESS_CHAPTERS } from "@/content/site";
 
 export function Process() {
   return (
     <section
       id="process"
-      className="section-padding bg-[#1e1610]"
+      className="relative border-y border-[var(--color-border)] bg-[var(--color-bg-warm)]"
       aria-labelledby="process-heading"
     >
-      <Container>
-        <ScrollReveal>
-          <p className="text-sm font-medium uppercase tracking-[0.3em] text-[var(--color-accent)]">
-            Process
-          </p>
-        </ScrollReveal>
-        <ScrollReveal delay={0.1}>
-          <h2
-            id="process-heading"
-            className="mt-4 max-w-2xl font-serif text-3xl leading-tight text-white md:text-4xl lg:text-5xl"
-          >
-            How a Kingcore core is made.
-          </h2>
-        </ScrollReveal>
+      {/* Header */}
+      <div className="section-padding pb-14">
+        <Container>
+          <ScrollReveal>
+            <p className="eyebrow mb-5">The Method · Five Chapters</p>
+          </ScrollReveal>
+          <ScrollReveal delay={0.1}>
+            <h2
+              id="process-heading"
+              className="prose-copper max-w-[820px] font-serif text-4xl leading-[1.0] tracking-tight md:text-5xl lg:text-6xl"
+              dangerouslySetInnerHTML={{
+                __html: "From kraft ribbon to <em>despatched core</em>.",
+              }}
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={0.15}>
+            <p className="mt-6 max-w-[560px] text-[17px] leading-relaxed text-[var(--color-text-muted)]">
+              Five operations, each measured. The same five every Kingcore tube
+              passes through — from the reels at the inlet to the
+              inspector&rsquo;s stamp at the dock.
+            </p>
+          </ScrollReveal>
+        </Container>
+      </div>
 
-        {/* Timeline */}
-        <div className="relative mt-12 md:mt-20">
-          {/* Connecting line — desktop only */}
-          <div className="absolute left-8 top-0 hidden h-full w-px bg-white/10 md:left-1/2 md:block" />
+      {/* Horizontal scroll rail */}
+      <div className="flex gap-6 overflow-x-auto px-[var(--container-px)] pb-24 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+        {PROCESS_CHAPTERS.map((ch, i) => (
+          <ScrollReveal key={ch.num} delay={i * 0.08}>
+            <article className="flex w-[520px] flex-shrink-0 flex-col overflow-hidden rounded-md border border-[var(--color-border-light)] bg-[var(--color-surface)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_40px_80px_-36px_rgba(61,43,31,.22)] md:min-h-[660px]">
+              {/* Vis area */}
+              <div className="relative flex h-[340px] items-center justify-center border-b border-[var(--color-border-light)] bg-[var(--color-bg-warm)]">
+                <span className="absolute left-6 top-5 font-serif text-xl italic text-[var(--color-accent)]">
+                  {ch.num}
+                </span>
+                <span className="absolute right-6 top-5 text-[9.5px] font-medium uppercase tracking-[0.24em] text-[var(--color-text-faint)]">
+                  {ch.fig}
+                </span>
+                {/* Placeholder for SVG illustration */}
+                <div className="flex h-full w-full items-center justify-center text-[var(--color-text-faint)]">
+                  <span className="font-serif text-6xl italic text-[var(--color-accent)]/20">
+                    {ch.num}
+                  </span>
+                </div>
+              </div>
 
-          <div className="grid gap-10 md:grid-cols-4 md:gap-6">
-            {PROCESS_STEPS.map((step, i) => {
-              const Icon = ICONS[i];
-              return (
-                <ScrollReveal key={step.step} delay={i * 0.12}>
-                  <div className="relative flex gap-5 md:flex-col md:items-center md:text-center">
-                    {/* Step number + icon */}
-                    <div className="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[var(--color-accent)]/30 bg-[var(--color-accent)]/10">
-                      <Icon
-                        className="h-6 w-6 text-[var(--color-accent)]"
-                        strokeWidth={1.5}
-                        aria-hidden="true"
+              {/* Body */}
+              <div className="flex flex-1 flex-col gap-4 p-9">
+                <h3
+                  className="prose-copper font-serif text-[34px] leading-[1.04] tracking-tight"
+                  dangerouslySetInnerHTML={{ __html: ch.title }}
+                />
+                <p className="text-[15.5px] leading-[1.65] text-[var(--color-text-muted)]">
+                  {ch.description}
+                </p>
+                {/* Specs */}
+                <div className="mt-auto flex justify-between gap-6 border-t border-[var(--color-border)] pt-5">
+                  {ch.specs.map((s) => (
+                    <div key={s.key}>
+                      <div className="mb-1.5 text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--color-text-faint)]">
+                        {s.key}
+                      </div>
+                      <div
+                        className="prose-copper font-serif text-xl"
+                        dangerouslySetInnerHTML={{ __html: s.val }}
                       />
                     </div>
+                  ))}
+                </div>
+              </div>
+            </article>
+          </ScrollReveal>
+        ))}
+      </div>
 
-                    <div>
-                      <span className="text-xs font-medium uppercase tracking-[0.2em] text-white/30">
-                        Step {step.step}
-                      </span>
-                      <h3 className="mt-1 text-lg font-semibold text-white">
-                        {step.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-white/60">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                </ScrollReveal>
-              );
-            })}
-          </div>
+      {/* Scroll cue */}
+      <Container>
+        <div className="flex items-center justify-between pb-10 text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-text-faint)]">
+          <span>Five chapters · drag or scroll →</span>
+          <span className="hidden items-center gap-3 md:flex">
+            <span className="h-px w-20 bg-[var(--color-accent)]" />
+            Continue
+          </span>
         </div>
       </Container>
     </section>

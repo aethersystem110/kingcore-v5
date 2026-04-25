@@ -1,73 +1,60 @@
 import { Container } from "@/components/ui/Container";
-import { COMPANY, CONTACT, NAV_LINKS, INDUSTRIES, PRODUCT_TYPES } from "@/content/site";
+import { LogoMark } from "@/components/ui/LogoMark";
+import { COMPANY, CONTACT, NAV_LINKS } from "@/content/site";
 
 const FOOTER_COLS = [
   {
-    title: "Products",
+    title: "Method",
     links: [
-      ...PRODUCT_TYPES.map((t) => ({ label: t.name, href: "#products" })),
-      { label: "View Specs", href: "#products" },
+      { label: "Winding", href: "#process" },
+      { label: "Curing", href: "#process" },
+      { label: "Grinding", href: "#process" },
+      { label: "Wax coating", href: "#process" },
+      { label: "Cutting & QC", href: "#process" },
     ],
   },
   {
-    title: "Industries",
-    links: INDUSTRIES.slice(0, 6).map((ind) => ({
-      label: ind.name,
-      href: "#industries",
-    })),
-  },
-  {
-    title: "Company",
-    links: NAV_LINKS.map((l) => ({ label: l.label, href: l.href })),
-  },
-  {
-    title: "Connect",
+    title: "Programme",
     links: [
+      { label: "Industries", href: "#industries" },
+      { label: "Export markets", href: "#exports" },
+      { label: "Quality & capability", href: "#quality" },
+      { label: "Procurement FAQ", href: "#faq" },
+      { label: "Open an inquiry", href: "#contact" },
+    ],
+  },
+  {
+    title: "Office",
+    links: [
+      { label: CONTACT.email, href: `mailto:${CONTACT.email}` },
+      { label: CONTACT.phone, href: `tel:${CONTACT.phone.replace(/[^+\d]/g, "")}` },
       { label: "WhatsApp", href: CONTACT.whatsappUrl, external: true },
-      { label: "Email", href: `mailto:${CONTACT.email}` },
-      { label: "Phone", href: `tel:${CONTACT.phone.replace(/[^+\d]/g, "")}` },
+      { label: CONTACT.address, href: "#" },
     ],
   },
 ] as const;
 
 export function Footer() {
   return (
-    <footer className="bg-[#15110d] pt-16 pb-8 md:pt-20" role="contentinfo">
+    <footer className="bg-[var(--color-night-dark)] pt-20 pb-10 text-[var(--color-paper)]" role="contentinfo">
       <Container>
-        {/* Top: logo + columns */}
-        <div className="grid gap-10 lg:grid-cols-6">
+        <div className="grid gap-14 border-b border-[var(--color-paper)]/12 pb-14 md:grid-cols-[1.6fr_1fr_1fr_1fr] md:gap-14">
           {/* Logo + tagline */}
-          <div className="lg:col-span-2">
-            <span className="font-serif text-2xl text-white">
-              {COMPANY.name}
-            </span>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/40">
-              {COMPANY.tagline}. {COMPANY.location}.
+          <div>
+            <LogoMark className="text-[34px] tracking-tight text-[var(--color-paper)]" dotSize={6} />
+            <p className="mt-[18px] max-w-[340px] font-serif text-lg italic leading-[1.5] text-[var(--color-paper)]/60">
+              A division of {COMPANY.legalName}. Spiral-wound, ground, waxed and
+              cut in Lahore — by appointment, since {COMPANY.founded}.
             </p>
-            {/* Trust badge */}
-            <div className="mt-5 inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-1.5 text-xs text-white/50">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                aria-hidden="true"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-              {COMPANY.certifications}
-            </div>
           </div>
 
-          {/* Nav columns */}
+          {/* Columns */}
           {FOOTER_COLS.map((col) => (
             <div key={col.title}>
-              <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              <h4 className="mb-[18px] text-[11px] font-medium uppercase tracking-[0.24em] text-[var(--color-accent)]">
                 {col.title}
-              </h3>
-              <ul className="mt-4 space-y-2.5">
+              </h4>
+              <ul className="list-none space-y-2.5 p-0">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <a
@@ -75,7 +62,7 @@ export function Footer() {
                       {...("external" in link && link.external
                         ? { target: "_blank", rel: "noopener noreferrer" }
                         : {})}
-                      className="text-sm text-white/40 transition-colors hover:text-white"
+                      className="text-sm text-[var(--color-paper)]/70 transition-colors duration-250 hover:text-[var(--color-accent)]"
                     >
                       {link.label}
                     </a>
@@ -86,15 +73,13 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Divider */}
-        <div className="mt-12 border-t border-white/10 pt-6 md:mt-16">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-xs text-white/30">
-              &copy; {new Date().getFullYear()} {COMPANY.legalName}. All rights
-              reserved.
-            </p>
-            <p className="text-xs text-white/20">Made in Pakistan</p>
-          </div>
+        {/* Bottom */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 text-xs text-[var(--color-paper)]/40">
+          <span>
+            {COMPANY.legalName} · Est. {COMPANY.founded} ·{" "}
+            {COMPANY.certifications} · &copy; {new Date().getFullYear()}
+          </span>
+          <span>Made in Pakistan</span>
         </div>
       </Container>
     </footer>
