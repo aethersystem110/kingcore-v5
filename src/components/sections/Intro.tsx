@@ -6,7 +6,7 @@ import { INTRO } from "@/content/site";
 
 export function Intro() {
   return (
-    <section className="section-padding bg-[var(--color-bg)]" id="about">
+    <section className="bg-[var(--color-bg)] py-20 md:py-[140px]" id="about">
       <Container>
         <div className="grid gap-12 md:grid-cols-[1fr_1.5fr] md:gap-20">
           {/* Left: headline */}

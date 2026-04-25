@@ -13,7 +13,7 @@ export function Process() {
       aria-labelledby="process-heading"
     >
       {/* Header */}
-      <div className="section-padding pb-14">
+      <div className="pb-14 pt-20 md:pt-[120px]">
         <Container>
           <ScrollReveal>
             <p className="eyebrow mb-5">The Method · Five Chapters</p>

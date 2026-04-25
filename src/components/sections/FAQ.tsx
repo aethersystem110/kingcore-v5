@@ -11,7 +11,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="section-padding bg-[var(--color-bg)]"
+      className="bg-[var(--color-bg)] py-20 md:py-[140px]"
       aria-labelledby="faq-heading"
     >
       <Container>

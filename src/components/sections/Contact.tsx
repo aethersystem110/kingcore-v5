@@ -47,6 +47,7 @@ export function Contact() {
     setStatus("sending");
 
     try {
+      // Try API route first (works on Vercel), fall back to mailto
       const res = await fetch("/api/inquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -57,7 +58,16 @@ export function Contact() {
       setStatus("sent");
       setForm(INITIAL);
     } catch {
-      setStatus("error");
+      // Fallback: open mailto with form data
+      const subject = encodeURIComponent(
+        `Inquiry from ${form.name} — ${form.company} (${form.country})`,
+      );
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nCompany: ${form.company}\nCountry: ${form.country}\nEmail: ${form.email}\nPhone: ${form.phone}\nQuantity: ${form.quantity}\nSpecs: ${form.innerDiameter} × ${form.wallThickness} × ${form.length}\nIndustry: ${form.industry}\n\n${form.message}`,
+      );
+      window.open(`mailto:info@kingcore.pk?subject=${subject}&body=${body}`);
+      setStatus("sent");
+      setForm(INITIAL);
     }
   };
 
@@ -67,7 +77,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="section-padding bg-[var(--color-bg)]"
+      className="bg-[var(--color-bg)] py-20 md:py-[140px]"
       aria-labelledby="contact-heading"
     >
       <Container>

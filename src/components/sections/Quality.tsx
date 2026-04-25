@@ -8,7 +8,7 @@ export function Quality() {
   return (
     <section
       id="quality"
-      className="section-padding bg-[var(--color-night-dark)] text-[var(--color-paper)]"
+      className="bg-[var(--color-night-dark)] py-[90px] text-[var(--color-paper)] md:py-[140px]"
       aria-labelledby="quality-heading"
     >
       <Container>
