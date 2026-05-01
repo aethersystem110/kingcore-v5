@@ -16,7 +16,7 @@ const PARALLEL = 8;
 function frameUrl(index: number, mobile: boolean): string {
   const dir = mobile ? "hero-frames-mobile" : "hero-frames";
   const n = String(index + 1).padStart(3, "0");
-  return `${BASE_PATH}/${dir}/f_${n}.jpg`;
+  return `${BASE_PATH}/${dir}/f_${n}.webp`;
 }
 
 function drawCover(ctx: CanvasRenderingContext2D, img: HTMLImageElement, w: number, h: number) {
