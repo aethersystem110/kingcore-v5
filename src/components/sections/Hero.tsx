@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 }
 
 const FRAME_COUNT = 139;
-const PRELOAD_BATCH = 12;
+const PARALLEL = 8;
 
 function frameUrl(index: number, mobile: boolean): string {
   const dir = mobile ? "hero-frames-mobile" : "hero-frames";
@@ -54,32 +54,46 @@ export function Hero() {
 
     let cancelled = false;
     let loaded = 0;
-    const loadOne = (i: number) =>
-      new Promise<void>((resolve) => {
+
+    const loadOne = (i: number): Promise<void> =>
+      new Promise((resolve) => {
         const img = new Image();
         img.decoding = "async";
-        img.src = frameUrl(i, mobile);
-        const done = () => {
-          if (cancelled) return;
+        const finalize = async () => {
+          if (cancelled) return resolve();
+          if (typeof img.decode === "function") {
+            try {
+              await img.decode();
+            } catch {
+              // ignore decode errors; draw will fallback
+            }
+          }
+          if (cancelled) return resolve();
           loaded += 1;
           setProgress(loaded / FRAME_COUNT);
           resolve();
         };
-        img.onload = done;
-        img.onerror = done;
+        img.onload = finalize;
+        img.onerror = finalize;
+        img.src = frameUrl(i, mobile);
         images[i] = img;
       });
 
     (async () => {
-      const head: Promise<void>[] = [];
-      for (let i = 0; i < Math.min(PRELOAD_BATCH, FRAME_COUNT); i += 1) head.push(loadOne(i));
-      await Promise.all(head);
+      let next = 0;
+      const worker = async () => {
+        while (!cancelled) {
+          const i = next;
+          next += 1;
+          if (i >= FRAME_COUNT) return;
+          await loadOne(i);
+        }
+      };
+      const workers: Promise<void>[] = [];
+      for (let w = 0; w < PARALLEL; w += 1) workers.push(worker());
+      await Promise.all(workers);
       if (cancelled) return;
       setReady(true);
-      for (let i = PRELOAD_BATCH; i < FRAME_COUNT; i += 1) {
-        if (cancelled) return;
-        await loadOne(i);
-      }
     })();
 
     return () => {
@@ -131,11 +145,19 @@ export function Hero() {
       if (!img || !img.complete || !img.naturalWidth) {
         for (let step = 1; step < FRAME_COUNT; step += 1) {
           const back = clamped - step;
+          const fwd = clamped + step;
           if (back >= 0) {
             const alt = imagesRef.current[back];
             if (alt && alt.complete && alt.naturalWidth) {
               drawCover(ctx, alt, canvas.clientWidth, canvas.clientHeight);
-              break;
+              return;
+            }
+          }
+          if (fwd < FRAME_COUNT) {
+            const alt = imagesRef.current[fwd];
+            if (alt && alt.complete && alt.naturalWidth) {
+              drawCover(ctx, alt, canvas.clientWidth, canvas.clientHeight);
+              return;
             }
           }
         }
