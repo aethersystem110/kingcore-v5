@@ -1,6 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
 import { Marquee } from "@/components/sections/Marquee";
-import { Intro } from "@/components/sections/Intro";
 import { Process } from "@/components/sections/Process";
 import { Stats } from "@/components/sections/Stats";
 import { Industries } from "@/components/sections/Industries";
@@ -24,13 +23,12 @@ export default function Home() {
       <main id="main">
         <Hero />
         <Marquee />
-        <Intro />
-        <Process />
         <Stats />
-        <Industries />
-        <ExportsSection />
         <Products />
+        <Industries />
+        <Process />
         <Quality />
+        <ExportsSection />
         <FAQ />
         <CTA />
         <Contact />

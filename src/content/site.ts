@@ -44,17 +44,17 @@ export const HERO_SLIDES = [
     eyebrow: "Imperial Synergies · Est. 1995",
     headline: "The core of <em>every roll</em>.",
     subtext:
-      "Spiral-wound paper tubes & cores, engineered for global industry — by appointment from Lahore.",
+      "Spiral-wound paper tubes & cores — made in Lahore since 1995, shipped to 12+ countries.",
   },
   {
     headline: "Tightly wound. Cleanly <em>cut</em>.",
     subtext:
-      "Precision kraft construction, ground smooth, sealed with an 18-micron wax coat, finished to spec at ±0.1 mm.",
+      "4–12 plies. 18-micron wax. ±0.1 mm cut tolerance. ISO 9001:2015.",
   },
   {
     headline: "Inside everything the world <em>ships</em>.",
     subtext:
-      "Textiles. Paper. Film. Tape. Construction. And everywhere in between — exporting to 12+ countries since 2003.",
+      "Textiles, paper, film, tape, construction — exporting since 2003.",
   },
 ] as const;
 
@@ -70,17 +70,6 @@ export const MARQUEE_ITEMS = [
   "Exporting since 2003",
 ] as const;
 
-// ── Intro ─────────────────────────────────────────────
-
-export const INTRO = {
-  eyebrow: "A Note · From the Floor",
-  headline: "Three decades of paper. One standard of <em>precision</em>.",
-  paragraphs: [
-    "Kingcore — a division of Imperial Synergies — has been manufacturing paper tubes, cores and cones from our facility in Lahore since 1995. What started as a family workshop has grown into one of Pakistan's largest spiral-wound core producers.",
-    "We do one thing, and we do it without compromise: <em>spiral paper tubes, made true</em>. Five hundred thousand cores a month. Eighteen microns of liquid wax. Tenth-of-a-millimetre cut tolerance. Quietly, by appointment, to converters across twelve countries.",
-  ],
-} as const;
-
 // ── Process ───────────────────────────────────────────
 
 export const PROCESS_CHAPTERS = [
@@ -89,7 +78,7 @@ export const PROCESS_CHAPTERS = [
     fig: "FIG. 01",
     title: "The <em>winding</em>.",
     description:
-      "Narrow kraft ribbons feed off stacked reels, pass through calibrated adhesive, and meet the rotating mandrel at a 28–45° helical angle. Four to twelve plies, seams offset by layer. The tube extrudes itself.",
+      "Kraft ribbons feed off stacked reels, meet the mandrel at a 28–45° helical angle, and bond into a multi-ply tube — seams offset by layer.",
     specs: [
       { key: "Plies", val: "4–<em>12</em>" },
       { key: "Adhesive", val: "<em>PVA</em> · starch" },
@@ -100,7 +89,7 @@ export const PROCESS_CHAPTERS = [
     fig: "FIG. 02",
     title: "The <em>curing</em>.",
     description:
-      "The drying tunnel cures the wet tube under controlled heat. Adhesive sets. Moisture lifts. The tube emerges firmer, warmer, and dimensionally stable — ready for the belt.",
+      "Drying tunnel at 85–95°C sets the adhesive and drops moisture under 8% — the tube emerges dimensionally stable.",
     specs: [
       { key: "Temp", val: "85–95<em>°C</em>" },
       { key: "Moisture", val: "≤ <em>8</em>%" },
@@ -111,7 +100,7 @@ export const PROCESS_CHAPTERS = [
     fig: "FIG. 03",
     title: "The <em>grinding</em>.",
     description:
-      "A sanding belt rides along the rotating tube. Rough kraft gives way to an even matte. Fine paper dust drifts down into integrated extraction. No sparks, no flame — just a clean face, ready for wax.",
+      "A sanding belt rides the rotating tube to an even matte face. Dust is captured by integrated extraction.",
     specs: [
       { key: "Surface", val: "<em>Sanded</em> matte" },
       { key: "Extraction", val: "<em>Integrated</em>" },
@@ -122,7 +111,7 @@ export const PROCESS_CHAPTERS = [
     fig: "FIG. 04",
     title: "The <em>wax</em>.",
     description:
-      "Heated liquid paraffin, applied by felt and metered to a world-class 18-micron coating. A polishing belt buffs to a low specular sheen — the lubricity stretch-film and label cores demand.",
+      "Heated paraffin is felt-applied and metered to an 18-micron coat, then buffed to the lubricity stretch-film cores demand.",
     specs: [
       { key: "Coating", val: "18 <em>μm</em>" },
       { key: "Wax", val: "<em>Paraffin</em>" },
@@ -133,7 +122,7 @@ export const PROCESS_CHAPTERS = [
     fig: "FIG. 05",
     title: "The <em>cut</em>.",
     description:
-      "A multi-blade saw descends in one motion. Length tolerance: ±0.1 mm — an order of magnitude tighter than trade standard. Square shoulder. Chamfered edge. Inspected. Despatched.",
+      "Multi-blade saw cuts to ±0.1 mm — square shoulder, chamfered edge, 100% inspected before despatch.",
     specs: [
       { key: "Tolerance", val: "±<em>0.1</em> mm" },
       { key: "QC", val: "<em>100%</em> inspected" },
@@ -147,7 +136,7 @@ export const STATS_SECTION = {
   eyebrow: "By the Numbers",
   headline: "Three decades, <em>measured</em>.",
   description:
-    "The figures procurement teams ask for first. Each is verified per batch and held to specification.",
+    "Verified per batch. The figures procurement teams ask for first.",
   items: [
     { key: "In trade since", value: 30, suffix: "+ years", decimals: 0 },
     { key: "Monthly capacity", value: 500, suffix: "K cores", decimals: 0 },
@@ -162,16 +151,16 @@ export const INDUSTRIES_SECTION = {
   eyebrow: "Industries Served",
   headline: "Inside <em>everything</em> the world ships.",
   description:
-    "Eight markets, one production line. Every Kingcore tube — from a 1″ tape core to a 16″ concrete form — is wound on the same press, to the same tolerance.",
+    "Eight markets, one production line — every tube wound on the same press, to the same tolerance.",
   items: [
-    { num: "i.", name: "Textiles & fabric rolls", description: "High-strength cores for yarn winding, weaving beams, fabric roll packaging." },
-    { num: "ii.", name: "Paper & film rolls", description: "Consistent-diameter cores for paper mills, BOPP film and laminate winding." },
-    { num: "iii.", name: "Tape & labels", description: "Small-bore precision cores for adhesive tape, label stock and receipt rolls." },
-    { num: "iv.", name: "Yarn & thread", description: "Lightweight cones and cores for spinning mills and thread manufacturing." },
-    { num: "v.", name: "Construction forms", description: "Heavy-wall tubes for concrete column forming and structural applications." },
-    { num: "vi.", name: "Carpet & flooring", description: "Large-diameter cores for carpet rolls, vinyl flooring and underlay." },
-    { num: "vii.", name: "Foil & food packaging", description: "Food-safe cores for aluminum foil, cling film and baking paper rolls." },
-    { num: "viii.", name: "Stretch & speciality film", description: "Custom cores for stretch wrap, shrink film and speciality substrates." },
+    { num: "i.", name: "Textiles & fabric rolls", description: "Yarn winding, weaving beams, fabric roll packaging." },
+    { num: "ii.", name: "Paper & film rolls", description: "Paper mills, BOPP film, laminate winding." },
+    { num: "iii.", name: "Tape & labels", description: "Adhesive tape, label stock, receipt rolls." },
+    { num: "iv.", name: "Yarn & thread", description: "Spinning mills, thread cones." },
+    { num: "v.", name: "Construction forms", description: "Concrete column forming, structural tubes." },
+    { num: "vi.", name: "Carpet & flooring", description: "Carpet rolls, vinyl flooring, underlay." },
+    { num: "vii.", name: "Foil & food packaging", description: "Aluminum foil, cling film, baking paper." },
+    { num: "viii.", name: "Stretch & speciality film", description: "Stretch wrap, shrink film, speciality substrates." },
   ],
 } as const;
 
@@ -213,19 +202,19 @@ export const QUALITY_SECTION = {
       num: "i.",
       title: "Consistent <em>wall</em> construction.",
       description:
-        "Every core rolled to identical wall thickness for predictable roll behaviour. No soft spots, no variance between batches — verified at the press.",
+        "Identical wall thickness, batch to batch — verified at the press.",
     },
     {
       num: "ii.",
       title: "Clean-cut <em>ends</em>.",
       description:
-        "No fraying, no delamination, ready to load. Precision cutting at ±0.1 mm means your rolls seat perfectly, every time.",
+        "Cut to ±0.1 mm. No fraying, no delamination, ready to load.",
     },
     {
       num: "iii.",
       title: "Export-ready <em>packaging</em>.",
       description:
-        "Palletised, shrink-wrapped, container-optimised. Your cores arrive undamaged, anywhere in the world — ISO 9001:2015 certified.",
+        "Palletised, shrink-wrapped, container-optimised. ISO 9001:2015.",
     },
   ],
 } as const;
@@ -236,7 +225,7 @@ export const EXPORTS = {
   eyebrow: "Export Programme",
   headline: "From Lahore to <em>twelve</em> countries — and counting.",
   description:
-    "Ocean-freight, container-optimised, palletised to converter spec. MOQ: one 20-ft container. Quote turnaround in 24 hours.",
+    "Container-optimised, palletised to converter spec. MOQ 1×20-ft container. 24-hour quote turnaround.",
   markets: [
     { name: "Lahore, PK", role: "Origin · 1995" },
     { name: "Middle East", role: "Active" },
@@ -288,7 +277,7 @@ export const FAQ_SECTION = {
 
 export const CTA_SECTION = {
   eyebrow: "Open an Inquiry",
-  headline: "The <em>next core</em> you run is the one that doesn't fail.",
+  headline: "Spec it. We&rsquo;ll <em>quote it in 24 hours</em>.",
 } as const;
 
 // ── Contact Form ──────────────────────────────────────

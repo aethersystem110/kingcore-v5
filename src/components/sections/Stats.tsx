@@ -76,7 +76,7 @@ function CounterCell({
 
 export function Stats() {
   return (
-    <section className="bg-[var(--color-night)] py-[90px] text-[var(--color-paper)] md:py-[120px]">
+    <section id="about" className="bg-[var(--color-night)] py-[90px] text-[var(--color-paper)] md:py-[120px]">
       <Container>
         {/* Header */}
         <div className="mb-[72px] grid gap-12 md:grid-cols-[1fr_1.5fr] md:gap-20">
