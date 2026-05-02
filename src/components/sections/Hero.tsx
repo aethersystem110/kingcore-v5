@@ -10,7 +10,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-const FRAME_COUNT = 139;
+const FRAME_COUNT = 278;
 const PARALLEL = 6;
 
 function frameUrl(index: number, mobile: boolean): string {
