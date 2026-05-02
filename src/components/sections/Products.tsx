@@ -22,7 +22,7 @@ export function Products() {
   return (
     <section
       id="products"
-      className="bg-[var(--color-surface)] py-20 md:py-[140px]"
+      className="section-cv bg-[var(--color-surface)] py-20 md:py-[140px]"
       aria-labelledby="products-heading"
     >
       <Container>

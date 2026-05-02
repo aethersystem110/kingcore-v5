@@ -16,9 +16,6 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 export default function Home() {
   return (
     <>
-      {/* Paper texture overlay */}
-      <div className="paper-texture" aria-hidden="true" />
-
       <Header />
       <main id="main">
         <Hero />

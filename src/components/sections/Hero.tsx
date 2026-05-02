@@ -11,7 +11,7 @@ if (typeof window !== "undefined") {
 }
 
 const FRAME_COUNT = 139;
-const PARALLEL = 8;
+const PARALLEL = 6;
 
 function frameUrl(index: number, mobile: boolean): string {
   const dir = mobile ? "hero-frames-mobile" : "hero-frames";
@@ -55,10 +55,11 @@ export function Hero() {
     let cancelled = false;
     let loaded = 0;
 
-    const loadOne = (i: number): Promise<void> =>
+    const loadOne = (i: number, priority: "high" | "low"): Promise<void> =>
       new Promise((resolve) => {
         const img = new Image();
         img.decoding = "async";
+        (img as HTMLImageElement & { fetchPriority?: string }).fetchPriority = priority;
         const finalize = async () => {
           if (cancelled) return resolve();
           if (typeof img.decode === "function") {
@@ -80,20 +81,33 @@ export function Hero() {
       });
 
     (async () => {
+      const L = FRAME_COUNT - 1;
+      const priority = Array.from(
+        new Set([0, Math.round(L / 4), Math.round(L / 2), Math.round((3 * L) / 4), L]),
+      ).sort((a, b) => a - b);
+      const prioritySet = new Set(priority);
+
+      await Promise.all(priority.map((i) => loadOne(i, "high")));
+      if (cancelled) return;
+      setReady(true);
+
+      const remaining: number[] = [];
+      for (let i = 0; i < FRAME_COUNT; i += 1) {
+        if (!prioritySet.has(i)) remaining.push(i);
+      }
+
       let next = 0;
       const worker = async () => {
         while (!cancelled) {
-          const i = next;
+          const idx = next;
           next += 1;
-          if (i >= FRAME_COUNT) return;
-          await loadOne(i);
+          if (idx >= remaining.length) return;
+          await loadOne(remaining[idx], "low");
         }
       };
       const workers: Promise<void>[] = [];
       for (let w = 0; w < PARALLEL; w += 1) workers.push(worker());
       await Promise.all(workers);
-      if (cancelled) return;
-      setReady(true);
     })();
 
     return () => {
@@ -174,7 +188,7 @@ export function Hero() {
         trigger: section,
         start: "top top",
         end: "bottom bottom",
-        scrub: 0.6,
+        scrub: 0.8,
         invalidateOnRefresh: true,
       },
       onUpdate: () => {

@@ -77,7 +77,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="bg-[var(--color-bg)] py-20 md:py-[140px]"
+      className="section-cv bg-[var(--color-bg)] py-20 md:py-[140px]"
       aria-labelledby="contact-heading"
     >
       <Container>

@@ -6,7 +6,7 @@ import { CTA_SECTION, CONTACT } from "@/content/site";
 
 export function CTA() {
   return (
-    <section className="relative border-t border-[var(--color-border)] bg-[var(--color-accent-light)] py-24 text-center sm:py-32 md:py-40 lg:py-44">
+    <section className="section-cv relative border-t border-[var(--color-border)] bg-[var(--color-accent-light)] py-24 text-center sm:py-32 md:py-40 lg:py-44">
       <Container>
         <ScrollReveal>
           <p className="eyebrow mb-6">{CTA_SECTION.eyebrow}</p>
