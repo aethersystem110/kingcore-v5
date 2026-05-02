@@ -8,7 +8,7 @@ export function ExportsSection() {
   return (
     <section
       id="exports"
-      className="border-y border-[var(--color-border)] bg-[var(--color-bg-warm)] py-[90px] md:py-[140px]"
+      className="section-cv border-y border-[var(--color-border)] bg-[var(--color-bg-warm)] py-[90px] md:py-[140px]"
     >
       <Container>
         <div className="grid items-center gap-12 md:grid-cols-[1fr_1.6fr] md:gap-20">

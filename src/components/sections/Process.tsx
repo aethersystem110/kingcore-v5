@@ -9,7 +9,7 @@ export function Process() {
   return (
     <section
       id="process"
-      className="relative border-y border-[var(--color-border)] bg-[var(--color-bg-warm)]"
+      className="section-cv relative border-y border-[var(--color-border)] bg-[var(--color-bg-warm)]"
       aria-labelledby="process-heading"
     >
       {/* Header */}

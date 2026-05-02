@@ -8,7 +8,7 @@ export function Industries() {
   return (
     <section
       id="industries"
-      className="bg-[var(--color-bg)] py-20 md:py-[140px]"
+      className="section-cv bg-[var(--color-bg)] py-20 md:py-[140px]"
       aria-labelledby="industries-heading"
     >
       <Container>
